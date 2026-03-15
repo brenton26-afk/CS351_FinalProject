@@ -13,7 +13,8 @@ def upload_file(s3_client, local_file_path, bucket_name, s3_key):
     #upload a file to s3.
     try:
         s3_client.upload_file(local_file_path, bucket_name, s3_key)
-        print(f"Failed to upload {local_file_path}: {e}")
+        print(f"Uploaded: {local_file_path} -> s3://{bucket_name}/{s3_key}")
+        #print(f"Failed to upload {local_file_path}: {e}")
     except ClientError as e:
         print(f"Failed to upload {local_file_path}: {e}")
 
