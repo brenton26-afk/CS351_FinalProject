@@ -1,1 +1,3 @@
 Here we will add the python file that should do things like access the cloud to find backed up versions of a file or run repairs to restore (recover) a file.
+
+recovery should find an issue with a file > look into why > look into backup to see if there is a most recent file backup > OR it should try to repair it. (Windows repair, other) > say sorry if no backup...
