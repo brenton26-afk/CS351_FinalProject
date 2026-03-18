@@ -1,10 +1,20 @@
 import os
 import boto3
 from botocore.exceptions import ClientError
+import sys
 
-LOCAL_FOLDER = r"C:\Users\bover\Downloads\CS 351\Final Project\projectData"
-BUCKET_NAME = "cs351-storage-bucket-project-demo"
+CURRENT_BUCKET = sys.argv[1]
+FOLDER_PATH = sys.argv[2]
+
+if len(sys.argv) < 3:
+    print("Usage: py update_to_s3.py <bucket_name> <folder_path>")
+    sys.exit(1)
+
+LOCAL_FOLDER = FOLDER_PATH  #LOCAL_FOLDER = r"C:\Users\bover\Downloads\CS 351\Final Project\projectData" 
+BUCKET_NAME = CURRENT_BUCKET    #BUCKET_NAME = "cs351-storage-bucket-project-demo"
 S3_PREFIX = "backups/"
+
+# have two buckets?
 
 def get_s3_file_size(s3_client, bucket_name, s3_key):
     #returns the size of s3 bucket in bytes, if there is none, itll return none
