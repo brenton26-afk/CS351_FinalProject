@@ -11,6 +11,7 @@
  - Go to aws Security Credentials
  - Create Access Key
  - Save Access Key and Secret Access Key
+ - Install AWS CLI to home computer
  - Open terminal at file location
  - (Make sure to pip install boto3 if not already done).
  - (aws configure. add in your ACCESS KEY, SECRET_ACCESS_KEY, Region=us-east-2, Output format = json).
