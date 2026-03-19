@@ -23,6 +23,23 @@ PDF_EXTENSIONS = {
 }
 
 
+def should_skip_file(file_path: str) -> bool:
+    name = os.path.basename(file_path).lower()
+
+    skip_suffixes = (
+        ".bak",
+        ".repaired",
+        ".pre_s3_restore.bak",
+        ".tmp",
+        ".temp"
+    )
+
+    if name.endswith(skip_suffixes):
+        return True
+
+    return False
+
+
 def is_text_file_corrupted(file_path: str) -> bool:
     ext = Path(file_path).suffix.lower()
 
@@ -79,6 +96,9 @@ def find_corrupted_files(folder_path: str) -> list[str]:
         for file_name in files:
             full_path = os.path.join(root, file_name)
 
+            if should_skip_file(full_path):
+                continue
+
             if is_file_corrupted(full_path):
                 corrupted_files.append(full_path)
 
@@ -87,10 +107,10 @@ def find_corrupted_files(folder_path: str) -> list[str]:
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: py file_corruption_scanner.py \"C:\\path\\to\\folder\"")
+        print('Usage: py corruption_scanner.py "C:\\path\\to\\folder"')
         sys.exit(2)
 
-    folder = sys.argv[1]    #This should use the local path set in the batch file.
+    folder = sys.argv[1]
 
     if not os.path.isdir(folder):
         print(f"Error: Folder does not exist: {folder}")
